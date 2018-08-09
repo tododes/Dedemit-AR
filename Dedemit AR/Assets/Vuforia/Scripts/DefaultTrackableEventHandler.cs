@@ -70,6 +70,10 @@ namespace Vuforia
         {
             Renderer[] rendererComponents = GetComponentsInChildren<Renderer>(true);
             Collider[] colliderComponents = GetComponentsInChildren<Collider>(true);
+            Dedemit dedemit = GetComponentInChildren<Dedemit>();
+            //DedemitFactory factory = GetComponentInChildren<DedemitFactory>();
+            //Dedemit dedemit = factory.spawnDedemit();
+            //dedemit.transform.parent = null;
 
             // Enable rendering:
             foreach (Renderer component in rendererComponents)
@@ -83,7 +87,8 @@ namespace Vuforia
                 component.enabled = true;
             }
 
-            Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");
+            //Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");
+            TrackController.singleton.setCurrentDedemit(dedemit);
         }
 
 
@@ -92,19 +97,20 @@ namespace Vuforia
             Renderer[] rendererComponents = GetComponentsInChildren<Renderer>(true);
             Collider[] colliderComponents = GetComponentsInChildren<Collider>(true);
 
-            // Disable rendering:
+            //Disable rendering:
             foreach (Renderer component in rendererComponents)
             {
                 component.enabled = false;
             }
 
-            // Disable colliders:
+            //Disable colliders:
             foreach (Collider component in colliderComponents)
             {
                 component.enabled = false;
             }
 
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost");
+            TrackController.singleton.setCurrentDedemit(null);
         }
 
         #endregion // PRIVATE_METHODS
